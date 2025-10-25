@@ -1,0 +1,57 @@
+<div class="lista-container">
+  <h2>📋 Lista de Tarefas</h2>
+
+  <div class="contadores">
+    <div class="contador-item total">
+      <span class="numero">{{ total }}</span>
+      <span class="label">Total</span>
+    </div>
+    <div class="contador-item concluidas">
+      <span class="numero">{{ concluidas }}</span>
+      <span class="label">Concluídas</span>
+    </div>
+    <div class="contador-item pendentes">
+      <span class="numero">{{ pendentes }}</span>
+      <span class="label">Pendentes</span>
+    </div>
+  </div>
+
+  <div *ngIf="tarefas.length === 0" class="mensagem-vazia">
+    📭 Nenhuma tarefa cadastrada
+  </div>
+
+  <div *ngFor="let tarefa of tarefas" 
+       class="tarefa-item"
+       [class.concluida]="tarefa.concluida">
+    
+    <div class="tarefa-info">
+      <h3 [class.riscado]="tarefa.concluida">{{ tarefa.titulo }}</h3>
+      <p *ngIf="tarefa.descricao" [class.riscado]="tarefa.concluida">
+        {{ tarefa.descricao }}
+      </p>
+      <small>⏰ Prazo: {{ formatarData(tarefa.prazo) }}</small>
+    </div>
+
+    <div class="tarefa-acoes">
+      <button 
+        (click)="marcarConcluida(tarefa.id)" 
+        class="btn-concluir"
+        [class.concluida]="tarefa.concluida">
+        {{ tarefa.concluida ? '↶' : '✓' }} 
+        {{ tarefa.concluida ? 'Reabrir' : 'Concluir' }}
+      </button>
+      
+      <button 
+        (click)="removerTarefa(tarefa.id)" 
+        class="btn-remover">
+        ✕ Remover
+      </button>
+    </div>
+  </div>
+
+  <div class="voltar-container">
+    <a routerLink="/cadastro" class="btn-voltar">
+      ← Voltar ao Cadastro
+    </a>
+  </div>
+</div>

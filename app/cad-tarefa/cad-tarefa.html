@@ -1,0 +1,46 @@
+<div class="cadastro-container">
+  <h2>Cadastrar Nova Tarefa</h2>
+  
+  <form (ngSubmit)="cadastrar()" #tarefaForm="ngForm">
+    <div class="form-group">
+      <label for="titulo">Título *</label>
+      <input 
+        type="text" 
+        id="titulo"
+        [(ngModel)]="titulo" 
+        name="titulo"
+        required
+        placeholder="Digite o título da tarefa">
+    </div>
+
+    <div class="form-group">
+      <label for="descricao">Descrição</label>
+      <textarea 
+        id="descricao"
+        [(ngModel)]="descricao" 
+        name="descricao"
+        placeholder="Digite a descrição da tarefa"
+        rows="3"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="prazo">Prazo de Conclusão *</label>
+      <input 
+        type="datetime-local" 
+        id="prazo"
+        [(ngModel)]="prazo" 
+        name="prazo"
+        required>
+    </div>
+
+    <div class="botoes">
+      <button type="submit" [disabled]="!tarefaForm.valid" class="btn-cadastrar">
+        Cadastrar Tarefa
+      </button>
+      
+      <a routerLink="/lista" class="btn-lista">
+        Ver Lista de Tarefas
+      </a>
+    </div>
+  </form>
+</div>
